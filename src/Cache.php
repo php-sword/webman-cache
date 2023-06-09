@@ -203,4 +203,15 @@ class Cache extends Manager implements CacheInterface
             throw new CacheException($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+    /**
+     * 读取缓存并删除
+     * @param string $name
+     * @return mixed
+     * @throws InvalidArgumentException
+     */
+    public function pull(string $name)
+    {
+        return $this->store()->pull($name);
+    }
 }

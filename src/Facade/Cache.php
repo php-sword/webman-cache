@@ -1,6 +1,4 @@
-<?php
-
-declare (strict_types=1);
+<?php declare (strict_types=1);
 
 namespace sword\Cache\Facade;
 
@@ -24,13 +22,17 @@ use sword\Cache\TagSet;
  * @method static bool deleteMultiple(iterable $keys) 删除缓存
  * @method static bool has(string $key) 判断缓存是否存在
  * @method static TagSet tag(string|array $name) 缓存标签
- * @method static TagSet remember(string $name, $value, ?int $expire) 如果不存在则写入缓存
+ * @method static mixed remember(string $name, $value, ?int $expire) 如果不存在则写入缓存
+ * @method static mixed pull(string $key, mixed $default = null) 读取缓存并删除
  */
 class Cache
 {
     protected static ?object $_instance;
 
-    public static function instance()
+    /**
+     * @return object|null
+     */
+    public static function instance(): ?object
     {
         if (!isset(static::$_instance)) {
             static::$_instance = new \sword\Cache\Cache();

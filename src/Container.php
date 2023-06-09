@@ -1,6 +1,4 @@
-<?php
-
-declare (strict_types=1);
+<?php declare (strict_types=1);
 
 namespace sword\Cache;
 
@@ -35,19 +33,19 @@ class Container implements ContainerInterface, ArrayAccess, IteratorAggregate, C
      * 容器中的对象实例
      * @var array
      */
-    protected $instances = [];
+    protected array $instances = [];
 
     /**
      * 容器绑定标识
      * @var array
      */
-    protected $bind = [];
+    protected array $bind = [];
 
     /**
      * 容器回调
      * @var array
      */
-    protected $invokeCallback = [];
+    protected array $invokeCallback = [];
 
     /**
      * 获取当前容器的实例（单例）

@@ -1,6 +1,4 @@
-<?php
-
-namespace sword\Cache;
+<?php declare (strict_types=1);
 
 namespace sword\Cache;
 
