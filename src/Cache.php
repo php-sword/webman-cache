@@ -50,9 +50,9 @@ class Cache extends Manager implements CacheInterface
      * @param string      $store
      * @param string|null $name
      * @param null        $default
-     * @return array
+     * @return mixed
      */
-    public function getStoreConfig(string $store, ?string $name = null, $default = null): array
+    public function getStoreConfig(string $store, ?string $name = null, $default = null)
     {
         if ($config = $this->getConfig("stores.{$store}")) {
             return Helper::get($config, $name, $default);
@@ -61,7 +61,11 @@ class Cache extends Manager implements CacheInterface
         throw new \InvalidArgumentException("Store [$store] not found.");
     }
 
-    protected function resolveType(string $name): array
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    protected function resolveType(string $name)
     {
         return $this->getStoreConfig($name, 'type', 'file');
     }
@@ -191,7 +195,7 @@ class Cache extends Manager implements CacheInterface
      * @throws CacheException
      * @throws InvalidArgumentException
      */
-    public function remember(string $name, $value, ?int $expire)
+    public function remember(string $name, $value, ?int $expire = null)
     {
         try{
             return $this->store()->remember($name, $value, $expire);
