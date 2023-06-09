@@ -1,0 +1,34 @@
+{
+    "name": "php-sword/webman-cache",
+    "description": "Cache manager for webman plugin",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Kyour",
+            "email": "kyour@vip.qq.com"
+        },
+        {
+            "name": "xpzhu",
+            "email": "lj.xia@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-zlib": "*",
+        "ext-ctype": "*",
+        "ext-mbstring": "*",
+        "psr/cache": "^1.0.0",
+        "opis/closure": "^3.6.0",
+        "psr/simple-cache": "^1.0.0",
+        "workerman/webman-framework": "^1.5.0"
+    },
+    "require-dev": {
+        "workerman/webman": "^1.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "sword\\Cache\\": "src"
+        }
+    }
+}
