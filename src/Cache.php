@@ -8,6 +8,8 @@ use DateInterval;
 use DateTime;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
+use sword\Cache\Exception\CacheException;
+use Throwable;
 
 /**
  * 缓存管理类
@@ -23,7 +25,7 @@ class Cache extends Manager implements CacheInterface
      * 默认驱动
      * @return string|null
      */
-    public function getDefaultDriver()
+    public function getDefaultDriver(): ?string
     {
         return $this->getConfig('default');
     }
@@ -46,11 +48,11 @@ class Cache extends Manager implements CacheInterface
     /**
      * 获取驱动配置
      * @param string      $store
-     * @param null|string $name
+     * @param string|null $name
      * @param null        $default
      * @return array
      */
-    public function getStoreConfig(string $store, $name = null, $default = null)
+    public function getStoreConfig(string $store, ?string $name = null, $default = null): array
     {
         if ($config = $this->getConfig("stores.{$store}")) {
             return Helper::get($config, $name, $default);
@@ -59,12 +61,12 @@ class Cache extends Manager implements CacheInterface
         throw new \InvalidArgumentException("Store [$store] not found.");
     }
 
-    protected function resolveType(string $name)
+    protected function resolveType(string $name): array
     {
         return $this->getStoreConfig($name, 'type', 'file');
     }
 
-    protected function resolveConfig(string $name)
+    protected function resolveConfig(string $name): array
     {
         return $this->getStoreConfig($name);
     }
@@ -74,7 +76,7 @@ class Cache extends Manager implements CacheInterface
      * @param null|string $name 连接配置名
      * @return Driver
      */
-    public function store(string $name = null)
+    public function store(string $name = null): Driver
     {
         return $this->driver($name);
     }
@@ -178,5 +180,23 @@ class Cache extends Manager implements CacheInterface
     public function tag($name): TagSet
     {
         return $this->store()->tag($name);
+    }
+
+    /**
+     * 如果不存在则写入缓存
+     * @param string $name
+     * @param $value
+     * @param int|null $expire
+     * @return mixed
+     * @throws CacheException
+     * @throws InvalidArgumentException
+     */
+    public function remember(string $name, $value, ?int $expire)
+    {
+        try{
+            return $this->store()->remember($name, $value, $expire);
+        }catch (Throwable $e){
+            throw new CacheException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

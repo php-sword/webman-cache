@@ -12,7 +12,7 @@ use Exception;
 use InvalidArgumentException;
 use Psr\SimpleCache\CacheInterface;
 use sword\Cache\Contract\CacheHandlerInterface;
-use throwable;
+use Throwable;
 
 /**
  * 缓存基础类
@@ -138,7 +138,7 @@ abstract class Driver implements CacheInterface, CacheHandlerInterface
      * @param int|null $expire 有效时间 0为永久
      * @return mixed
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws throwable
+     * @throws Throwable
      */
     public function remember(string $name, $value, $expire = null)
     {
@@ -169,7 +169,7 @@ abstract class Driver implements CacheInterface, CacheHandlerInterface
 
             // 解锁
             $this->delete($name . '_lock');
-        } catch (Exception | throwable $e) {
+        } catch (Exception | Throwable $e) {
             $this->delete($name . '_lock');
             throw $e;
         }

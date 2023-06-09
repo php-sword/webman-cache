@@ -24,6 +24,7 @@ use sword\Cache\TagSet;
  * @method static bool deleteMultiple(iterable $keys) 删除缓存
  * @method static bool has(string $key) 判断缓存是否存在
  * @method static TagSet tag(string|array $name) 缓存标签
+ * @method static TagSet remember(string $name, $value, ?int $expire) 如果不存在则写入缓存
  */
 class Cache
 {
