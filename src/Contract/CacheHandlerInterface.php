@@ -1,6 +1,4 @@
-<?php
-
-declare (strict_types=1);
+<?php declare (strict_types=1);
 
 namespace sword\Cache\Contract;
 
@@ -53,10 +51,10 @@ interface CacheHandlerInterface
 
     /**
      * 删除缓存
-     * @param string $name 缓存变量名
+     * @param string $key 缓存变量名
      * @return bool
      */
-    public function delete(string $name);
+    public function delete(string $key);
 
     /**
      * 清除缓存

@@ -1,6 +1,4 @@
-<?php
-
-declare (strict_types=1);
+<?php declare (strict_types=1);
 
 namespace sword\Cache\Driver;
 
@@ -128,14 +126,14 @@ class Wincache extends Driver
 
     /**
      * 删除缓存
-     * @param string $name 缓存变量名
+     * @param string $key 缓存变量名
      * @return bool
      */
-    public function delete($name): bool
+    public function delete($key): bool
     {
         $this->writeTimes++;
 
-        return wincache_ucache_delete($this->getCacheKey($name));
+        return wincache_ucache_delete($this->getCacheKey($key));
     }
 
     /**

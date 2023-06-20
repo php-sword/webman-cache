@@ -1,6 +1,4 @@
-<?php
-
-declare (strict_types=1);
+<?php declare (strict_types=1);
 
 namespace sword\Cache;
 
@@ -54,7 +52,7 @@ class Cache extends Manager implements CacheInterface
      */
     public function getStoreConfig(string $store, ?string $name = null, $default = null)
     {
-        if ($config = $this->getConfig("stores.{$store}")) {
+        if ($config = $this->getConfig("stores.$store")) {
             return Helper::get($config, $name, $default);
         }
 

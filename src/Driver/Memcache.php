@@ -1,6 +1,4 @@
-<?php
-
-declare (strict_types=1);
+<?php declare (strict_types=1);
 
 namespace sword\Cache\Driver;
 
@@ -153,15 +151,15 @@ class Memcache extends Driver
 
     /**
      * 删除缓存
-     * @param string     $name 缓存变量名
+     * @param string     $key 缓存变量名
      * @param bool|false $ttl
      * @return bool
      */
-    public function delete($name, $ttl = false): bool
+    public function delete($key, $ttl = false): bool
     {
         $this->writeTimes++;
 
-        $key = $this->getCacheKey($name);
+        $key = $this->getCacheKey($key);
 
         return false === $ttl ?
             $this->handler->delete($key) :

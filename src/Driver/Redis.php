@@ -1,6 +1,4 @@
-<?php
-
-declare (strict_types=1);
+<?php declare (strict_types=1);
 
 namespace sword\Cache\Driver;
 
@@ -90,7 +88,7 @@ class Redis extends Driver
      */
     public function has($name): bool
     {
-        return $this->handler->exists($this->getCacheKey($name)) ? true : false;
+        return (bool)$this->handler->exists($this->getCacheKey($name));
     }
 
     /**
@@ -170,14 +168,14 @@ class Redis extends Driver
 
     /**
      * 删除缓存
-     * @param string $name 缓存变量名
+     * @param string $key 缓存变量名
      * @return bool
      */
-    public function delete($name): bool
+    public function delete($key): bool
     {
         $this->writeTimes++;
 
-        $key    = $this->getCacheKey($name);
+        $key    = $this->getCacheKey($key);
         $result = $this->handler->del($key);
         return $result > 0;
     }

@@ -1,6 +1,4 @@
-<?php
-
-declare (strict_types=1);
+<?php declare (strict_types=1);
 
 namespace sword\Cache\Driver;
 
@@ -75,7 +73,7 @@ class File extends Driver
      * @param string $name 缓存标识名
      * @return array|null
      */
-    protected function getRaw(string $name)
+    protected function getRaw(string $name): ?array
     {
         $filename = $this->getCacheKey($name);
 
@@ -208,14 +206,14 @@ class File extends Driver
 
     /**
      * 删除缓存
-     * @param string $name 缓存变量名
+     * @param string $key 缓存变量名
      * @return bool
      */
-    public function delete($name): bool
+    public function delete($key): bool
     {
         $this->writeTimes++;
 
-        return $this->unlink($this->getCacheKey($name));
+        return $this->unlink($this->getCacheKey($key));
     }
 
     /**
@@ -265,7 +263,7 @@ class File extends Driver
      * @param $dirname
      * @return bool
      */
-    private function rmdir($dirname)
+    private function rmdir($dirname): bool
     {
         if (!is_dir($dirname)) {
             return false;

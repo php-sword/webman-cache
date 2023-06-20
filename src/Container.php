@@ -286,10 +286,11 @@ class Container implements ContainerInterface, ArrayAccess, IteratorAggregate, C
     /**
      * 调用反射执行类的方法 支持参数绑定
      * @access public
-     * @param mixed $method     方法
-     * @param array $vars       参数
-     * @param bool  $accessible 设置是否可访问
+     * @param mixed $method 方法
+     * @param array $vars 参数
+     * @param bool $accessible 设置是否可访问
      * @return mixed
+     * @throws ReflectionException
      */
     public function invokeMethod($method, array $vars = [], bool $accessible = false)
     {
@@ -356,8 +357,9 @@ class Container implements ContainerInterface, ArrayAccess, IteratorAggregate, C
      * 调用反射执行类的实例化 支持依赖注入
      * @access public
      * @param string $class 类名
-     * @param array  $vars  参数
+     * @param array $vars 参数
      * @return mixed
+     * @throws ReflectionException
      */
     public function invokeClass(string $class, array $vars = [])
     {
